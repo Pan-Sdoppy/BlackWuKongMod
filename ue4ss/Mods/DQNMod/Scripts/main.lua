@@ -51,30 +51,24 @@ RegisterKeyBind(Key.L, function()
     --    print(value:GetFullName())
     --end
     reduceAtk()
-    local obj = getObj()
-    local BaiYi = getBaiYi()
-    print(obj:GetAttrValue(BaiYi, 1))
 end)
 
-ExecuteWithDelay(1500, function()
-    print("GreatMonki2 Initialization...")
-    RegisterHook("/Script/b1-Managed.InputActionEventReceiver:InputActionTrigger", function(Context, ActionName, TriggerEvent, InputActionValueType, InputActionValue)
-        local InputAction = InputActionValueType:get()
-        if InputAction == 0 then
-            local wukong = getWuKong()
-            local BaiYi = getBaiYi()
-            local obj = getObj()
-            local wukong_hp = obj:GetAttrValue(wukong, 151)
-            local BaiYi_hp = obj:GetAttrValue(BaiYi, 151)
-            if wukong_hp <= 100 then
-                addBlood()
-                return
-            end
-            -- 29622.130859375
-            if BaiYi_hp <= 2000 then
-                addBlood()
-                return
-            end
+RegisterHook("/Script/b1-Managed.InputActionEventReceiver:InputActionTrigger", function(Context, ActionName, TriggerEvent, InputActionValueType, InputActionValue)
+    local InputAction = InputActionValueType:get()
+    if InputAction == 0 then
+        local wukong = getWuKong()
+        local BaiYi = getBaiYi()
+        local obj = getObj()
+        local wukong_hp = obj:GetAttrValue(wukong, 151)
+        local BaiYi_hp = obj:GetAttrValue(BaiYi, 151)
+        if wukong_hp <= 100 then
+            addBlood()
+            return
         end
-    end)
+        -- 29622.130859375
+        if BaiYi_hp <= 2000 then
+            addBlood()
+            return
+        end
+    end
 end)
